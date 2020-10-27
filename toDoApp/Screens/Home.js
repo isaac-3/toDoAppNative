@@ -3,6 +3,13 @@ import * as React from 'react';
 import { StyleSheet, Text, SafeAreaView, StatusBar, View, TextInput, ScrollView } from 'react-native';
 import {MaterialCommunityIcons ,AntDesign} from '@expo/vector-icons'
 import {connect} from "react-redux"
+import {saveUser} from "../Actions/saveUser.js"
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        reduxSaveUser:(userDetails) => dispatch(saveUser(userDetails)
+    )
+}}
 
 const colors = {
   themeColor: "#4263ec",
@@ -93,13 +100,22 @@ const Task = ({task, icon, stamp}) => {
   )
 }
 
-export default function App() {
+function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" style={styles.statusBar}/>
       <View style={styles.innerView}>
         <MaterialCommunityIcons name="text" size={30} style={{color: colors.white}}/>
-        <AntDesign name="user" size={30} style={{color: colors.white}} onPress={() => console.log("here")}/>
+        <AntDesign name="user" size={30} style={{color: colors.white}} 
+        onPress={() => {
+            const userDetails = {};
+            userDetails.name = this.state.name;
+            // userDetails.schoolName = this.state.schoolName;
+            // userDetails.companyName = this.state.companyName;
+            reduxSaveEmployeeDetail(userDetails)
+            // this.props.navigation.navigate("ShowEmployeeDetail")
+            }}
+        />
       </View>
       <View style={styles.headerTitle}>
         <Text style={styles.headerText}>Hey Isaac Chavez</Text>
@@ -120,6 +136,8 @@ export default function App() {
     </SafeAreaView>
   );
 }
+
+export default connect(null,mapDispatchToProps)(EmployeeDetails);
 
 const styles = StyleSheet.create({
   container: {
