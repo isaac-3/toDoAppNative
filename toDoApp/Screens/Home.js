@@ -110,10 +110,7 @@ function App() {
         onPress={() => {
             const userDetails = {};
             userDetails.name = this.state.name;
-            // userDetails.schoolName = this.state.schoolName;
-            // userDetails.companyName = this.state.companyName;
             reduxSaveEmployeeDetail(userDetails)
-            // this.props.navigation.navigate("ShowEmployeeDetail")
             }}
         />
       </View>
